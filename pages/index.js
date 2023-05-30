@@ -2,41 +2,21 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
+import handlePay from "@/utils/handlePay";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  function handlePay() {
-    const url = "https://pay2.edokanpay.com/checkout-v2/create";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        api: '6474ddc432013',
-        client: '6474ddc43812f',
-        secret: '1435706151',
-        amount: 5,
-        position:'https://masud.foowork.com',
-        cus_name: 'Masud',
-        cus_email: 'rana028511@gmail.com',
-        success_url: 'http://localhost:3000/success?name=masud',
-        cancel_url: 'http://localhost:3000/cancel?name=masud',
-      }),
+  
+  const pay = () => {
+    handlePay({
+      name:"Masud",
+      email:"test@gmail.com",
+      amount: 4
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "data");
-        window.open(data.edokanpayURL)
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
   }
 
-
-  // https://masud.foowork.com/success&transactionId=9344842&paymentAmount=10&paymentFee=0
+  // https://masud.foowork.com/success?transactionId=9344842&paymentAmount=10&paymentFee=0
   return (
     <>
       <Head>
@@ -47,7 +27,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <button onClick={handlePay}>pay</button>
+          <button onClick={pay}>pay</button>
         </div>
       </main>
     </>
