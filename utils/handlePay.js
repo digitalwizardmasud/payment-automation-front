@@ -3,6 +3,7 @@ const clientKey = process.env.EDokan_CLIENT
 const secretKey = process.env.EDokan_SECRET
 
 const handlePay=({name, email, amount})=> {
+  
     const url = "https://pay2.edokanpay.com/checkout-v2/create";
     fetch(url, {
       method: "POST",
@@ -17,8 +18,8 @@ const handlePay=({name, email, amount})=> {
         position:'https://masud.foowork.com',
         cus_name: name || "No Name",
         cus_email: email || "No Email",
-        success_url: 'http://localhost:3000/success?email='+email,
-        cancel_url: 'http://localhost:3000/cancel?email='+email,
+        success_url: `${location.origin}/payment/success?email=${email}`,
+        cancel_url: `${location.origin}/payment/cancel?email=${email}`,
       }),
     })
       .then((res) => res.json())
