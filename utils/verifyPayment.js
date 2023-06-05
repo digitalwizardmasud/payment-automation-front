@@ -1,4 +1,4 @@
-const verifyPayment = ({transactionId, paymentAmount, email}) => {
+const verifyPayment = ({transactionId, email}) => {
     fetch("https://pay2.edokanpay.com/checkout-v2/verify", {
         method: "POST",
         headers: {
@@ -9,11 +9,12 @@ const verifyPayment = ({transactionId, paymentAmount, email}) => {
         }),
       })
         .then((res) => res.json())
-        .then(({statusCode, paymentID}) => {
+        .then(({statusCode, paymentID, transactionAmount}) => {
           if(statusCode==1){
             console.log(paymentID, 'paymentID');
             console.log(paymentAmount, 'amount');
             console.log(email, 'email');
+            console.log(transactionAmount, 'trans amount');
           }
         })
         .catch((error) => {

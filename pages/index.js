@@ -7,13 +7,12 @@ import handlePay from "@/utils/handlePay";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home(props) {
-  console.log(props);
   
   const pay = () => {
     handlePay({
       name:"Masud",
       email:"test@gmail.com",
-      amount: 150
+      amount: 2
     })
   }
 
